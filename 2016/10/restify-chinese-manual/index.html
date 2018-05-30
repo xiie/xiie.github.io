@@ -1,0 +1,902 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=calibri:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="framework,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="restify 是一款相对于express更专注于RESTful API 的nodejs框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="restify 中文手册">
+<meta property="og:url" content="https://xiie.github.io/2016/10/restify-chinese-manual/index.html">
+<meta property="og:site_name" content="Xiie's Blog">
+<meta property="og:description" content="restify 是一款相对于express更专注于RESTful API 的nodejs框架">
+<meta property="og:updated_time" content="2018-05-28T03:50:42.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="restify 中文手册">
+<meta name="twitter:description" content="restify 是一款相对于express更专注于RESTful API 的nodejs框架">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://xiie.github.io/2016/10/restify-chinese-manual/"/>
+
+  <title> restify 中文手册 | Xiie's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ded7054acfc4dad4173d8bf640f99bd2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xiie's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                restify 中文手册
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-26T21:16:08+08:00" content="2016-10-26">
+              2016-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/restify-chinese-manual/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/restify-chinese-manual/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>restify 是一款相对于express更专注于RESTful API 的nodejs框架</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install restify</div></pre></td></tr></table></figure>
+<h2 id="服务端-API"><a href="#服务端-API" class="headerlink" title="服务端 API"></a>服务端 API</h2><p>最简单的一个服务端脚步<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> restify = <span class="built_in">require</span>(<span class="string">'restify'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">respond</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'hello '</span> + req.params.name);</div><div class="line">    next();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> server = restify.createServer();</div><div class="line">server.get(<span class="string">'/hello/:name'</span>, respond);</div><div class="line">server.head(<span class="string">'/hello/:name'</span>, respond);</div><div class="line"></div><div class="line">server.listen(<span class="number">8080</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'%s listening at %s'</span>, server.name, server.url);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>一睹为快, 使用curl命令在shell中访问restify服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">curl -is http://localhost:3000/hello/mark -H &apos;accept: text/plain&apos;</div><div class="line"></div><div class="line">HTTP/1.1 200 OK</div><div class="line">Content-Type: text/plain</div><div class="line">Content-Length: 10</div><div class="line">Date: Wed, 26 Oct 2016 13:51:08 GMT</div><div class="line">Connection: keep-alive</div><div class="line"></div><div class="line">hello mark</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">curl -is http://localhost:3000/hello/mark</div><div class="line"></div><div class="line">HTTP/1.1 200 OK</div><div class="line">Content-Type: application/json</div><div class="line">Content-Length: 12</div><div class="line">Date: Wed, 26 Oct 2016 13:54:03 GMT</div><div class="line">Connection: keep-alive</div><div class="line"></div><div class="line">&quot;hello mark&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">curl -is http://localhost:3000/hello/mark -X HEAD -H &apos;connection: close&apos;</div><div class="line"></div><div class="line">HTTP/1.1 200 OK</div><div class="line">Content-Type: application/json</div><div class="line">Content-Length: 12</div><div class="line">Date: Wed, 26 Oct 2016 13:56:26 GMT</div><div class="line">Connection: close</div></pre></td></tr></table></figure>
+<p>restify 能根据客户端请求返回对应格式信息, 默认返回json. 还能自由实现Connection类型.<br>因为REST APIs中经常使用curl, 所以restify中自带了一个插件可以检测客户端是否是curl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">server.pre(restify.pre.userAgentConnection());</div></pre></td></tr></table></figure>
+<h3 id="创建一个服务器"><a href="#创建一个服务器" class="headerlink" title="创建一个服务器"></a>创建一个服务器</h3><p>直接调用createServer方法就可以创建一个服务器; 可选的参数配置与node原生的http.Server.listen一致<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> restify = <span class="built_in">require</span>(<span class="string">'restify'</span>),</div><div class="line">fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> server = restify.createServer(&#123;</div><div class="line">    <span class="attr">certificate</span>: fs.readFileSync(<span class="string">'path/to/server/certificate'</span>),</div><div class="line">    <span class="attr">key</span>: fs.readFileSync(<span class="string">'path/to/server/key'</span>),</div><div class="line">    <span class="attr">name</span>: <span class="string">'MyApp'</span>,</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.listen(<span class="number">8080</span>);</div></pre></td></tr></table></figure></p>
+<p>参数说明</p>
+<ul>
+<li>certificate: string, HTTPS服务器的证书</li>
+<li>key: string, HTTPS服务器的证书key</li>
+<li>formatters: object, 自定义的response的content-type</li>
+<li>log: object, 服务器日志，可以配合bunyan一起使用</li>
+<li>name: string, 服务器的response header</li>
+<li>spdy: Object, 允许集成node-spdy服务器</li>
+<li>version: string, 路由版本</li>
+<li>responseTimeHeader: string, X-Response-Time</li>
+<li>responseTimeFormatter: function, 格式化header的值</li>
+</ul>
+<h3 id="注册handler-server-use"><a href="#注册handler-server-use" class="headerlink" title="注册handler : server.use()"></a>注册handler : server.use()</h3><p>注册服务器控制组件，按照代码顺序执行，需要放在路由代码之前。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"></div><div class="line">server.use(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    count++;</div><div class="line">    <span class="built_in">console</span>.log(count);</div><div class="line">    next();<span class="comment">// 进入下一个组件 或 下一个相同路由方法</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>restify的路由基本与express/sinatra相同.<br>经过URL-decoded解码的数据会存放在req.params中以供使用.<br>路由支持正则匹配.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">send</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'hello '</span> + req.params.name);</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;</div><div class="line"></div><div class="line">server.post(<span class="string">'/hello'</span>, <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="number">201</span>, <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substr(<span class="number">3</span>, <span class="number">8</span>));</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;);</div><div class="line">server.put(<span class="string">'/hello'</span>, send);</div><div class="line">server.get(<span class="string">'/hello/:name'</span>, send);</div><div class="line">server.head(<span class="string">'/hello/:name'</span>, send);</div><div class="line">server.del(<span class="string">'hello/:name'</span>, <span class="function"><span class="keyword">function</span> <span class="title">rm</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="number">204</span>);</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(<span class="regexp">/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(req.params[<span class="number">0</span>]);</div><div class="line">    <span class="built_in">console</span>.log(req.params[<span class="number">1</span>]);</div><div class="line">    res.send(<span class="number">200</span>);</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>你可以在next()中传递一个字符串, 去匹配执行链中的下一个路由</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> restify = <span class="built_in">require</span>(<span class="string">'restify'</span>);</div><div class="line"><span class="keyword">var</span> server = restify.createServer();</div><div class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">send</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'hello '</span> + req.params.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">server.use(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    count++;</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(<span class="string">'/foo/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   next(<span class="string">'foo2'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(&#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'foo2'</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">'/hello/:name'</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   assert.equal(count, <span class="number">1</span>);</div><div class="line">   res.send(<span class="number">200</span>);</div><div class="line">   next();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(<span class="string">'/hello/:name'</span>,send);</div><div class="line"></div><div class="line">server.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'%s listening at %s'</span>, server.name, server.url);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上例中的foo2只会被执行一次, 这里需要注意的是:</p>
+<ul>
+<li>如果next()中传递的name在下游找不到, restify将会返回一个500</li>
+<li>不能循环使用这种传递</li>
+<li>最后, 使用next(‘foo2’)唤起的路由不能重复注册</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">server.get(<span class="string">'/foo/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   next(<span class="string">'foo2'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(&#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'foo2'</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">'/hello/:name'</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   assert.equal(count, <span class="number">1</span>);</div><div class="line">   res.send(<span class="number">200</span>);</div><div class="line">   next();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(<span class="string">'/hello/:name'</span>,send);<span class="comment">//这个路由将无法匹配上</span></div></pre></td></tr></table></figure>
+<p>链式组件: restify的路由机制可以接受多个组件调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server.get(</div><div class="line">    <span class="string">'/foo/:id'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Authenticate'</span>);</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">        res.send(<span class="number">200</span>);</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>如果用字符串定义了一个参数化的路由，你可以在程序的其他地方将其解析出来，这将非常有助于定位程序内的路由资源；而不需要你手动拼接准确的地址，还需要去进行适当的URL编码.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">server.get(&#123;<span class="attr">name</span>: <span class="string">'city'</span>, <span class="attr">path</span>: <span class="string">'/cities/:slug'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">// in another route</span></div><div class="line">server.get(<span class="string">'/test'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</div><div class="line">    res.send(&#123;</div><div class="line">        <span class="attr">country</span>: <span class="string">'Australia'</span>,</div><div class="line">        <span class="comment">// render a URL by specifying the route name and parameters</span></div><div class="line">        capital: server.router.render(<span class="string">'city'</span>, &#123;<span class="attr">slug</span>: <span class="string">'canberra'</span>&#125;, &#123;<span class="attr">details</span>: <span class="literal">true</span>&#125;)</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>得到的结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    country: &quot;Australia&quot;,</div><div class="line">    capital: &quot;/cities/canberra?details=true&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>带有版本控制的路由: 大多数的REST APIs都应带有版本控制，restify返回的header Accept-Version中就恰好附带着类似semver的版本信息, 使用了与NPM一样的方式实现。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> restify = <span class="built_in">require</span>(<span class="string">'restify'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> server = restify.createServer();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendV1</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'hello: '</span> + req.params.name);</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendV2</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(&#123;<span class="attr">hello</span>: req.params.name&#125;);</div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> PATH = <span class="string">'/hello/:name'</span>;</div><div class="line">server.get(&#123;<span class="attr">path</span>: PATH, <span class="attr">version</span>: <span class="string">'1.1.3'</span>&#125;, sendV1);</div><div class="line">server.get(&#123;<span class="attr">path</span>: PATH, <span class="attr">version</span>: <span class="string">'2.0.0'</span>&#125;, sendV2);</div><div class="line"></div><div class="line">server.listen(<span class="number">8080</span>);</div></pre></td></tr></table></figure></p>
+<p>使用curl访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ curl -s localhost:8080/hello/mark</div><div class="line">&quot;hello: mark&quot;</div><div class="line"></div><div class="line">$ curl -s -H &apos;accept-version: ~1&apos; localhost:8080/hello/mark</div><div class="line">&quot;hello: mark&quot;</div><div class="line"></div><div class="line">$ curl -s -H &apos;accept-version: ~2&apos; localhost:8080/hello/mark</div><div class="line">&#123;&quot;hello&quot;:&quot;mark&quot;&#125;</div><div class="line"></div><div class="line">$ curl -s -H &apos;accept-version: ~3&apos; localhost:8080/hello/mark | json</div><div class="line">&#123;</div><div class="line">    &quot;code&quot;: &quot;InvalidVersion&quot;,</div><div class="line">    &quot;message&quot;: &quot;GET /hello/mark supports versions: 1.1.3, 2.0.0&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然你也可以同一个接口指定多个版本信息<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">server.get(&#123;<span class="attr">path</span>: PATH, <span class="attr">version</span>: [<span class="string">'2.0.0'</span>, <span class="string">'2.1.0'</span>, <span class="string">'2.2.0'</span>]&#125;, sendV2);</div></pre></td></tr></table></figure></p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>restify中有一些处理错误的方法. 首先，你可以仅仅简单调用res.send(err). 当然你也可以像这样将错误信息暂存进路由中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server.get(<span class="string">'/hello/:name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> database.get(req.params.name, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> next(err);</div><div class="line"></div><div class="line">        res.send(user);</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>如果你调用res.send()时遇到了错误，一般会带有一个statusCode信息，再要么直接报500(除非此时你显式的使用 res.send(4xx, new Error(‘blah’)); ).</p>
+<p>另外的，restify2.1提供了next.ifError API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server.get(<span class="string">'/hello/:name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> database.get(req.params.name, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</div><div class="line">        next.ifError(err);</div><div class="line"></div><div class="line">        res.send(user);</div><div class="line">        next();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>有时，你想使用一种通用的错误处理机制对付所有的请求异常；就可以像这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">server.get(<span class="string">'/hello/:name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="comment">// some internal unrecoverable error</span></div><div class="line">    <span class="keyword">var</span> err = <span class="keyword">new</span> restify.errors.InternalServerError(<span class="string">'oh noes!'</span>);</div><div class="line">    <span class="keyword">return</span> next(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.on(<span class="string">'InternalServer'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, err, cb</span>) </span>&#123;</div><div class="line">    err.body = <span class="string">'something is wrong!'</span>;</div><div class="line">    <span class="keyword">return</span> cb();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>自定义的错误处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> restify = <span class="built_in">require</span>(<span class="string">'restify'</span>);</div><div class="line"><span class="keyword">var</span> server = restify.createServer();</div><div class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyError</span>(<span class="params">message</span>) </span>&#123;</div><div class="line">    restify.RestError.call(<span class="keyword">this</span>, &#123;</div><div class="line">        <span class="attr">restCode</span>: <span class="string">'MyError'</span>,</div><div class="line">        <span class="attr">statusCode</span>: <span class="number">418</span>,</div><div class="line">        <span class="attr">message</span>: message,</div><div class="line">        <span class="attr">constructorOpt</span>: MyError</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'MyError'</span>;</div><div class="line">&#125;;</div><div class="line">util.inherits(MyError, restify.RestError);</div><div class="line"></div><div class="line">server.get(<span class="string">'/hello/:name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> next(<span class="keyword">new</span> MyError(<span class="string">'here occur an error'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'%s listening at %s'</span>, server.name, server.url);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="node-服务端-API"><a href="#node-服务端-API" class="headerlink" title="node 服务端 API"></a>node 服务端 API</h3><p>事件：restify服务器除了会发送所有的node原生http.Server中事件，还会发送一些你可能需要用到的其他事件。</p>
+<p>res() : 允许你在路由前添加组件；如果你愿意的话，可以像只钩子(hook)一样改变请求头信息。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">server.pre(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    req.headers.accept = <span class="string">'application/json'</span>;  <span class="comment">// screw you client!</span></div><div class="line">    <span class="keyword">return</span> next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>run() : 无论路由如何，都可以添加组件。</p>
+<h3 id="已经绑定的插件"><a href="#已经绑定的插件" class="headerlink" title="已经绑定的插件"></a>已经绑定的插件</h3><ul>
+<li>解析Accept头部: 注册restify服务时传递参数进行配置即可</li>
+<li>解析授权Authorization头部: 目前只支持基础的http授权和认证</li>
+<li>跨域处理</li>
+<li>解析日期: 可以调整时钟偏移</li>
+<li>解析请求字符串</li>
+<li>支持JSONP</li>
+<li>解析body: JSON/URL-encoded/multipart form</li>
+<li>请求日志: 使用了轻量的bunyan日志框架(出于性能考虑，默认只记录所有请求id信息)</li>
+<li>Gzip响应: 只有客户端请求accept-encoding: gzip时才会奏效</li>
+<li>静态资源: 支持http缓存机制</li>
+<li>节流</li>
+<li>Request Expiry</li>
+<li>审计日志(详细的记录输入和输出): 这个蛮特殊的，不是使用use()调用，而是在after事件中触发.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> server = restify.createServer();</div><div class="line"></div><div class="line">server.use(restify.acceptParser(server.acceptable));</div><div class="line"></div><div class="line">server.use(restify.authorizationParser());</div><div class="line"></div><div class="line">server.use(restify.CORS(&#123;</div><div class="line">    <span class="attr">origins</span>: [<span class="string">'https://foo.com'</span>, <span class="string">'http://bar.com'</span>, <span class="string">'http://baz.com:8081'</span>], <span class="comment">// defaults to ['*']</span></div><div class="line">    credentials: <span class="literal">true</span>, <span class="comment">// defaults to false</span></div><div class="line">    headers: [<span class="string">'x-foo'</span>] <span class="comment">// sets expose-headers</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">server.use(restify.dateParser(<span class="number">60</span>));</div><div class="line"></div><div class="line">server.use(restify.queryParser());</div><div class="line"></div><div class="line">server.use(restify.jsonp());</div><div class="line"></div><div class="line">server.use(restify.gzipResponse());</div><div class="line"></div><div class="line">server.use(restify.bodyParser(&#123;</div><div class="line">    <span class="attr">maxBodySize</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">mapParams</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">mapFiles</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">overrideParams</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">multipartHandler</span>: <span class="function"><span class="keyword">function</span>(<span class="params">part</span>) </span>&#123;</div><div class="line">        part.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="comment">/* do something with the multipart data */</span></div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">multipartFileHandler</span>: <span class="function"><span class="keyword">function</span>(<span class="params">part</span>) </span>&#123;</div><div class="line">        part.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="comment">/* do something with the multipart file data */</span></div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">keepExtensions</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">uploadDir</span>: os.tmpdir(),</div><div class="line">    <span class="attr">multiples</span>: <span class="literal">true</span></div><div class="line">    hash: <span class="string">'sha1'</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">server.use(restify.requestLogger(&#123;</div><div class="line">    <span class="attr">properties</span>: &#123;</div><div class="line">        <span class="attr">foo</span>: <span class="string">'bar'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">serializers</span>: &#123;...&#125;</div><div class="line">&#125;));</div><div class="line"></div><div class="line">server.use(restify.requestExpiry(&#123;</div><div class="line">    <span class="attr">header</span>: <span class="string">'x-request-expiry-time'</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.get(<span class="regexp">/\/docs\/current\/?.*/</span>, restify.serveStatic(&#123;</div><div class="line">    <span class="attr">directory</span>: <span class="string">'./documentation/v1'</span>,</div><div class="line">    <span class="attr">default</span>: <span class="string">'index.html'</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">server.use(restify.throttle(&#123;</div><div class="line">    <span class="attr">burst</span>: <span class="number">100</span>,</div><div class="line">    <span class="attr">rate</span>: <span class="number">50</span>,</div><div class="line">    <span class="attr">ip</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">overrides</span>: &#123;</div><div class="line">        <span class="string">'192.168.1.1'</span>: &#123;</div><div class="line">            <span class="attr">rate</span>: <span class="number">0</span>,<span class="comment">// unlimited</span></div><div class="line">            burst: <span class="number">0</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;));</div><div class="line"></div><div class="line">server.use(<span class="function"><span class="keyword">function</span> <span class="title">setETag</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.header(<span class="string">'ETag'</span>, <span class="string">'myETag'</span>);</div><div class="line">    res.header(<span class="string">'Last-Modified'</span>, <span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.use(restify.conditionalRequest());</div><div class="line"></div><div class="line">server.get(<span class="string">'/hello/:name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'hello '</span> + req.params.name);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.on(<span class="string">'after'</span>, restify.auditLogger(&#123;</div><div class="line">    <span class="attr">log</span>: bunyan.createLogger(&#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">'audit'</span>,</div><div class="line">        <span class="attr">stream</span>: process.stdout</div><div class="line">    &#125;)</div><div class="line">&#125;));</div></pre></td></tr></table></figure>
+<h3 id="请求-API"><a href="#请求-API" class="headerlink" title="请求 API"></a>请求 API</h3><p>打包了所有node http.IncomingMessage APIs，事件和属性；还包括下面的</p>
+<ul>
+<li>header(key, [defaultValue])</li>
+<li>accepts(type)</li>
+<li>is(type)</li>
+<li>isSecure()</li>
+<li>isChunked()</li>
+<li>isKeepAlive()</li>
+<li>log</li>
+<li>getQuery()</li>
+<li>time()</li>
+<li>startHandlerTimer(handlerName)</li>
+<li>endHandlerTimer(handlerName)</li>
+</ul>
+<h3 id="响应-API"><a href="#响应-API" class="headerlink" title="响应 API"></a>响应 API</h3><p>打包了所有node ServerResponse APIs，事件和属性；还包括下面的</p>
+<p>－ header(key, value)<br>－ charSet(type)<br>－ cache([type], [options])<br>－ status(code)<br>－ send([status], body)<br>－ redirect(status, url, next)<br>－ redirect([url | options], next)</p>
+<ul>
+<li>json([status], body)</li>
+</ul>
+<h3 id="DTrace"><a href="#DTrace" class="headerlink" title="DTrace"></a>DTrace</h3><p>restify 最酷的一个特性是：当你添加一个新的路由或组件时，将自动为其创建一个 DTrace探针。</p>
+<h2 id="客户端-API"><a href="#客户端-API" class="headerlink" title="客户端 API"></a>客户端 API</h2><ul>
+<li>JsonClient: sends and expects application/json</li>
+<li>StringClient: sends url-encoded request and expects text/plain</li>
+<li>HttpClient: thin wrapper over node’s http/https libraries</li>
+</ul>
+<p>参考链接<br><a href="http://restify.com/" target="_blank" rel="external">restify 官方文档</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/framework/" rel="tag">#framework</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/javascript-closure/" rel="next" title="javascript 闭包">
+                <i class="fa fa-chevron-left"></i> javascript 闭包
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/nodejs-api-based-on-restify-and-mongoose/" rel="prev" title="nodejs api demo based on restify and mongoose">
+                nodejs api demo based on restify and mongoose <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/restify-chinese-manual/"
+           data-title="restify 中文手册" data-url="https://xiie.github.io/2016/10/restify-chinese-manual/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Philo Xiie" />
+          <p class="site-author-name" itemprop="name">Philo Xiie</p>
+          <p class="site-description motion-element" itemprop="description">Der Tod ist der zeitlose Frieden und das leben ist der Krieg</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端-API"><span class="nav-number">2.</span> <span class="nav-text">服务端 API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个服务器"><span class="nav-number">2.1.</span> <span class="nav-text">创建一个服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册handler-server-use"><span class="nav-number">2.2.</span> <span class="nav-text">注册handler : server.use()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">2.3.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">2.4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node-服务端-API"><span class="nav-number">2.5.</span> <span class="nav-text">node 服务端 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#已经绑定的插件"><span class="nav-number">2.6.</span> <span class="nav-text">已经绑定的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求-API"><span class="nav-number">2.7.</span> <span class="nav-text">请求 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应-API"><span class="nav-number">2.8.</span> <span class="nav-text">响应 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DTrace"><span class="nav-number">2.9.</span> <span class="nav-text">DTrace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端-API"><span class="nav-number">3.</span> <span class="nav-text">客户端 API</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Philo Xiie</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xiie"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
